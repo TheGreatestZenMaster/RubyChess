@@ -1,3 +1,8 @@
+require_relative "chess_board"
+
 class Chess
-   def initialize;end 
+    attr_reader :board
+    def initialize
+        @board = ChessBoard.new   
+    end 
 end
