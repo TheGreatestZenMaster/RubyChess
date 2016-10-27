@@ -8,6 +8,6 @@ class Player
     def choose_piece(board)
        puts "Choose a piece like this '1,1'!"
        position = gets.chomp.split(",").map{|x|x.to_i}
-       puts position.inspect
+       puts board.squares[position].inspect
     end
 end

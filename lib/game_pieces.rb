@@ -1,5 +1,6 @@
 class Game_Piece
-    attr_reader :location, :color
+    attr_reader :location, :color, :symbol
+    
     def initialize(location, color)
         @location = location
         color == "white"? @color = color: @color = "black"
@@ -7,7 +8,7 @@ class Game_Piece
 end
 
 class Pawn < Game_Piece
-    attr_reader :location, :color, :symbol
+    
     def initialize(location, color)
         super(location, color)
         @color == "white"? @symbol= "\u2659".encode('utf-8').white: @symbol= "\u2659".encode('utf-8').red
@@ -15,7 +16,7 @@ class Pawn < Game_Piece
 end
 
 class Rook < Game_Piece
-    attr_reader :location, :color, :symbol
+    
     def initialize(location, color)
         super(location, color)
         @color == "white"? @symbol= "\u2656".encode('utf-8').white: @symbol= "\u2656".encode('utf-8').red
@@ -23,7 +24,7 @@ class Rook < Game_Piece
 end
 
 class Knight < Game_Piece
-    attr_reader :location, :color, :symbol
+
     def initialize(location, color)
         super(location, color)
         @color == "white"? @symbol= "\u265B".encode('utf-8').white: @symbol= "\u265B".encode('utf-8').red
@@ -31,7 +32,7 @@ class Knight < Game_Piece
 end
 
 class Bishop < Game_Piece
-    attr_reader :location, :color, :symbol
+
     def initialize(location, color)
         super(location, color)
         @color == "white"? @symbol= "\u2657".encode('utf-8').white: @symbol= "\u2657".encode('utf-8').red
@@ -39,7 +40,7 @@ class Bishop < Game_Piece
 end
 
 class Queen < Game_Piece
-    attr_reader :location, :color, :symbol
+
     def initialize(location, color)
         super(location, color)
         @color == "white"? @symbol= "\u2655".encode('utf-8').white: @symbol= "\u2655".encode('utf-8').red
@@ -47,7 +48,7 @@ class Queen < Game_Piece
 end
 
 class King < Game_Piece
-    attr_reader :location, :color, :symbol
+
     def initialize(location, color)
         super(location, color)
         @color == "white"? @symbol= "\u2654".encode('utf-8').white: @symbol= "\u2654".encode('utf-8').red
