@@ -1,4 +1,5 @@
 require 'colorize'
+require_relative "game_pieces"
 
 class ChessBoard
     attr_reader :squares, :pieces, :space
@@ -13,7 +14,6 @@ class ChessBoard
                                     :knight => "\u265B".encode('utf-8').red, :pawn => "\u2659".encode('utf-8').red})
         @space = Hash(:white => "\u2652".encode('utf-8').white, :black => "\u2652".encode('utf-8').black)
         starting_positions
-        display
     end
     
     def build_board(cols, rows)
@@ -27,32 +27,29 @@ class ChessBoard
     
     def starting_positions
         (1..8).each do |column|
-            @squares[[column, 2]] = @pieces[:white][:pawn]
-            @squares[[column, 7]] = @pieces[:black][:pawn]
+            @squares[[column, 2]] = Pawn.new([column, 2], "white")
+            @squares[[column, 7]] = Pawn.new([column, 7], "black")
             if column == 1 || column == 8
-                @squares[[column, 1]] = @pieces[:white][:rook]
-                @squares[[column, 8]] = @pieces[:black][:rook]
+                @squares[[column, 1]] = Rook.new([column, 1], "white")
+                @squares[[column, 8]] = Rook.new([column, 8], "black")
             elsif column == 2 || column == 7
-                @squares[[column, 1]] = @pieces[:white][:knight]
-                @squares[[column, 8]] = @pieces[:black][:knight]
+                @squares[[column, 1]] = Knight.new([column, 1], "white")
+                @squares[[column, 8]] = Knight.new([column, 8], "black")
             elsif column == 3 || column == 6
-                @squares[[column, 1]] = @pieces[:white][:bishop]
-                @squares[[column, 8]] = @pieces[:black][:bishop]
+                @squares[[column, 1]] = Bishop.new([column, 1], "white")
+                @squares[[column, 8]] = Bishop.new([column, 8], "black")
             elsif column == 4
-                @squares[[column, 1]] = @pieces[:white][:queen]
-                @squares[[column, 8]] = @pieces[:black][:king]
+                @squares[[column, 1]] = Queen.new([column, 1], "white")
+                @squares[[column, 8]] = King.new([column, 8], "black")
             else
-                @squares[[column, 1]] = @pieces[:white][:king]
-                @squares[[column, 8]] = @pieces[:black][:queen]
+                @squares[[column, 1]] = King.new([column, 1], "white")
+                @squares[[column, 8]] = Queen.new([column, 8], "black")
             end
         end
-        
     end
         
-    
-    def piece_output(column,row, color)
-        square = @squares[[column,row]]
-        square.nil?? @space[color.to_sym]: square
+    def check_for_piece(column,row, color)
+        @squares[[column,row]].nil?? @space[color.to_sym]: @squares[[column,row]].symbol
     end
     
     def display
@@ -62,15 +59,15 @@ class ChessBoard
                 (1..8).each do |column|
                     if row % 2 == 0 
                         if column % 2 == 1
-                            (section % 2 == 1)? row_output << @space[:white]*3: row_output << @space[:white] + "#{piece_output(column,row,"white")}" + @space[:white]
+                            (section % 2 == 1)? row_output << @space[:white]*3: row_output << @space[:white] + "#{check_for_piece(column,row,"white")}" + @space[:white]
                         elsif column % 2 == 0
-                            (section % 2 == 1)? row_output << @space[:black]*3: row_output << @space[:black] + "#{piece_output(column,row,"black")}" + @space[:black]
+                            (section % 2 == 1)? row_output << @space[:black]*3: row_output << @space[:black] + "#{check_for_piece(column,row,"black")}" + @space[:black]
                         end
                     elsif row % 2 == 1 && 
                         if column % 2 == 1
-                            (section % 2 == 1)? row_output << @space[:black]*3: row_output << @space[:black] + "#{piece_output(column,row,"black")}" + @space[:black]
+                            (section % 2 == 1)? row_output << @space[:black]*3: row_output << @space[:black] + "#{check_for_piece(column,row,"black")}" + @space[:black]
                         elsif column % 2 == 0
-                            (section % 2 == 1)? row_output << @space[:white]*3: row_output << @space[:white] + "#{piece_output(column,row,"white")}" + @space[:white]
+                            (section % 2 == 1)? row_output << @space[:white]*3: row_output << @space[:white] + "#{check_for_piece(column,row,"white")}" + @space[:white]
                         end
                     end
                 end
@@ -79,7 +76,3 @@ class ChessBoard
         end
     end
 end
-
-
-
-chess = ChessBoard.new
