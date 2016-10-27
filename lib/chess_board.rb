@@ -28,10 +28,23 @@ space = Hash(:white => "\u2652".encode('utf-8').white, :black => "\u2652".encode
 chess = ChessBoard.new
 puts chess.squares.inspect
 
+(1..8).each do |rows|
+    if rows % 2 == 0
+        puts (space[:white]*3 + space[:black]*3) * 4
+        puts (space[:white]*3 + space[:black]*3) * 4
+        puts (space[:white]*3 + space[:black]*3) * 4
+    else
+        puts (space[:black]*3 + space[:white]*3) * 4
+        puts (space[:black]*3 + space[:white]*3) * 4
+        puts (space[:black]*3 + space[:white]*3) * 4
+    end
+end
+
+puts ""
+puts ""
+
 puts space[:white]*3 + space[:black]*3 + space[:white]*3
-
 puts (space[:white] + "#{pieces[:white][:king]}" + space[:white]) + space[:black] +"#{pieces[:black][:knight]}" + space[:black] + space[:white]*3
-
 puts space[:white]*3 + space[:black]*3 + space[:white]*3
 
 puts space[:black]*3 + space[:white]*3 + space[:black]*3 
