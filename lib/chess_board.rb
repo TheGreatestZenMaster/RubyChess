@@ -75,4 +75,12 @@ class ChessBoard
             end
         end
     end
+    
+    def move_piece(piece, new_position)
+        temp = piece.location
+        @squares[new_position] = piece
+        piece.location = new_position
+        @squares[temp] = nil
+    end
+    
 end

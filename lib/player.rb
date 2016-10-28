@@ -5,9 +5,19 @@ class Player
         (color == "white")? @color = :white: @color = :black
     end
     
-    def choose_piece(board)
-       puts "Choose a piece like this '1,1'!"
-       position = gets.chomp.split(",").map{|x|x.to_i}
-       puts board.squares[position].inspect
+    def choose_square
+        puts "Choose a piece like this '1,1'!"
+        position = gets.chomp.split(",").map{|x|x.to_i}
     end
+    
+    def check_color(piece)
+        if piece.nil?
+            puts "nil!"
+            same_color = false
+        else
+            puts piece.color
+            (piece.color == @color.to_s)? same_color = true: same_color = false
+        end
+        same_color
+    end 
 end

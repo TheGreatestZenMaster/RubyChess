@@ -1,5 +1,5 @@
 class Game_Piece
-    attr_reader :location, :color, :symbol
+    attr_accessor :location, :color, :symbol
     
     def initialize(location, color)
         @location = location
@@ -12,6 +12,18 @@ class Pawn < Game_Piece
     def initialize(location, color)
         super(location, color)
         @color == "white"? @symbol= "\u2659".encode('utf-8').white: @symbol= "\u2659".encode('utf-8').red
+    end
+    
+    def valid_moves(position)
+        moves = Array.new
+        if @color = "white"
+            if @location[1] == 2
+                (1..2).each {|x| moves << [@location[0] ,@location[1]+x] }
+            else
+                moves << [@location[0] ,@location[1]+1]
+            end
+        end
+        moves.include?(position)? true: false
     end
 end
 
