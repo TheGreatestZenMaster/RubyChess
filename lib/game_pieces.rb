@@ -111,7 +111,7 @@ class Knight < Game_Piece
     attr_accessor :moves
     def initialize(location, color)
         super(location, color)
-        @color == "white"? @symbol= "\u265B".encode('utf-8').white: @symbol= "\u265B".encode('utf-8').red
+        @color == "white"? @symbol= "\u265E".encode('utf-8').white: @symbol= "\u265E".encode('utf-8').red
     end
 end
 

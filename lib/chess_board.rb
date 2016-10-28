@@ -12,7 +12,7 @@ class ChessBoard
                         :black => {:king => "\u2654".encode('utf-8').red, :queen => "\u2655".encode('utf-8').red, 
                                     :rook => "\u2656".encode('utf-8').red, :bishop => "\u2657".encode('utf-8').red, 
                                     :knight => "\u265B".encode('utf-8').red, :pawn => "\u2659".encode('utf-8').red})
-        @space = Hash(:white => "\u2652".encode('utf-8').white, :black => "\u2652".encode('utf-8').black)
+        @space = Hash(:white => "\u2589".encode('utf-8').white, :black => "\u2589".encode('utf-8').black)
         starting_positions
     end
     
@@ -71,7 +71,7 @@ class ChessBoard
                         end
                     end
                 end
-            puts row_output
+            puts row_output.center(400)
             end
         end
     end
