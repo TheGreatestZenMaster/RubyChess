@@ -16,14 +16,14 @@ class Pawn < Game_Piece
     
     def valid_moves(position)
         moves = Array.new
-        if @color = "white"
-            if @location[1] == 2
-                (1..2).each {|x| moves << [@location[0] ,@location[1]+x] }
-            else
-                moves << [@location[0] ,@location[1]+1]
-            end
+        valid_move = false
+        if @color == "white"
+            @location[1] == 2? (1..2).each {|x| moves << [@location[0] ,@location[1]+x] }: moves << [@location[0] ,@location[1]+1]
+        else
+            @location[1] == 7? (1..2).each {|x| moves << [@location[0] ,@location[1]-x] }: moves << [@location[0] ,@location[1]-1]
         end
-        moves.include?(position)? true: false
+        moves.include?(position)? valid_move = true: (puts "That's not a valid move for that piece!")
+        valid_move
     end
 end
 

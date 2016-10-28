@@ -28,7 +28,7 @@ class Chess
     
     def choose_move(player, piece)
         begin
-            puts "Choose a place to move to!"
+            puts "Now, choose a place to move it to!"
             position = gets.chomp.split(",").map{|x|x.to_i}
         end until piece.valid_moves(position)
         puts "move made"
