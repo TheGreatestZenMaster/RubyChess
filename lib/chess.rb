@@ -11,11 +11,15 @@ class Chess
     end 
     
     def tests
+        @board.squares[[2,3]] = Rook.new([2,3], "white")
+        @board.squares[[5,5]] = Bishop.new([5,5], "white")
         @board.display
-        piece_choice = choose_piece(@player1)
-        piece_move = choose_move(@player1, piece_choice)
-        @board.move_piece(piece_choice, piece_move)
-        @board.display
+        while true
+            piece_choice = choose_piece(@player1)
+            piece_move = choose_move(@player1, piece_choice)
+            @board.move_piece(piece_choice, piece_move)
+            @board.display
+        end
     end
     
     def choose_piece(player)
@@ -30,9 +34,8 @@ class Chess
         begin
             puts "Now, choose a place to move it to!"
             position = gets.chomp.split(",").map{|x|x.to_i}
-        end until piece.valid_moves(position)
-        puts "move made"
-        return position
+        end until piece.valid_moves(@board, position)
+        position
     end
 end
 
